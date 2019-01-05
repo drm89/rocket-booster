@@ -6,6 +6,8 @@ using UnityEngine;
 public class Rocket : MonoBehaviour {
     [SerializeField]
     private float rcsTrust = 100f;
+    [SerializeField]
+    private float mainTrust = 100f;
     private Rigidbody rigidbody;
     private AudioSource audioSource;
 	// Use this for initialization
@@ -21,11 +23,10 @@ public class Rocket : MonoBehaviour {
 
     private void ProcessInput()
     {
-        float m = rcsTrust * Time.deltaTime;
 
         if (Input.GetKey(KeyCode.Space))
         {
-            rigidbody.AddRelativeForce(Vector3.up* rcsTrust);
+            rigidbody.AddRelativeForce(Vector3.up* mainTrust);
             if (!audioSource.isPlaying)
             {
                 audioSource.Play();
@@ -36,6 +37,7 @@ public class Rocket : MonoBehaviour {
             audioSource.Stop();
         }
 
+        float m = rcsTrust * Time.deltaTime;
         rigidbody.freezeRotation = true;
         if (Input.GetKey(KeyCode.A))
         {
